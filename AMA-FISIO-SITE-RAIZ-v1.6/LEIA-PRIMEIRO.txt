@@ -1,0 +1,29 @@
+AMA FISIO v1.6 — SITE CANÔNICO, UMA SÓ PÁGINA
+
+Este pacote tem o index.html na RAIZ, sem subpastas AMA-FISIO-LOGIN-ESTAVEL.
+Foi criado para corrigir o site que ainda carrega a mensagem antiga
+"A configuração inicial ainda não foi concluída. Execute o instalador da conta mestre."
+Essa mensagem NÃO consta da versão v1.6.
+
+ENVIE AO GITHUB PELO NAVEGADOR:
+1. Extraia o ZIP.
+2. Abra o repositório ama-fisio na aba Code, NA RAIZ do repositório (onde aparecem as pastas antigas).
+3. Clique Add file -> Upload files.
+4. Arraste TODOS OS ARQUIVOS E A PASTA assets QUE ESTÃO DENTRO DA PASTA EXTRAÍDA.
+   NÃO arraste a pasta que os contém e NÃO envie o ZIP sem extrair.
+5. Clique Commit changes e aguarde o GitHub Pages concluir a publicação.
+6. Confira em Settings -> Pages: Deploy from a branch, main, /(root).
+7. Abra o endereço principal (sem nome de pasta):
+   https://dashboardscellz.github.io/ama-fisio/
+8. Caso uma aba antiga ainda esteja aberta, feche-a. Atualize a página nova com Ctrl + Shift + R.
+9. A tela deve mencionar v1.6 no rodapé do painel esquerdo.
+10. Login: Amanda Marinho. Senha: a atual do Firebase Authentication.
+
+Firebase Authentication: a conta interna configurada é manasses.medstar@gmail.com,
+e o UID autorizado termina em 8Wfk1.
+Firebase Firestore: as regras devem continuar autorizando SOMENTE o UID completo já cadastrado.
+
+NÃO modifique os bancos e as regras apenas para resolver problema de publicação.
+NÃO use dados reais de pacientes antes de testar cadastro, autenticação e permissões.
+Não publique a senha no GitHub.
+Este pacote contém arquivos públicos do site, não contém senha nem credencial privada.
