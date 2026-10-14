@@ -1,0 +1,28 @@
+AMA FISIO - Versao 1.3 | acesso por nome e senha
+
+Voce ja criou o projeto ama-fisio, ativou Authentication (E-mail/senha)
+e criou o Cloud Firestore no modo producao. Nao repita essas etapas.
+
+NO WINDOWS:
+1. Extraia esta pasta do ZIP.
+2. Na pasta AMA-FISIO, execute INSTALAR-NO-WINDOWS.bat.
+3. Sera solicitada a senha mestre. Ela NAO sera salva no codigo.
+4. O instalador abrira o Firebase para autorizar a publicacao.
+5. Quando terminar, abra o link do site mostrado na tela.
+6. Login da tela do AMA FISIO: Amanda Marinho.
+   Senha: a que voce digitou na configuracao.
+
+O site NAO solicitara e-mail pessoal, nao enviara e-mails nem WhatsApp.
+Os agendamentos e seus lembretes estarao apenas dentro do site.
+
+O Firebase Authentication usa nos bastidores uma identidade TECNICA no formato
+requerido pelo servico, sem caixa de e-mail pessoal. O Firestore somente
+aceita o UID exclusivo da Amanda. Nao guarde a senha no codigo publico.
+
+Se o Windows avisar que Node.js nao esta instalado, baixe o Node.js LTS
+em https://nodejs.org, instale e volte ao passo 2.
+
+Aviso: a configuracao so ocorre quando voce executa o instalador.
+Nenhum usuario ou dado foi criado no seu Firebase por este arquivo ZIP.
+
+Para detalhes, leia o README.md.
