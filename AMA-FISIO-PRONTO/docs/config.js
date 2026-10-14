@@ -12,9 +12,10 @@ window.AMA_CONFIG = {
     measurementId: 'G-7Z5W02X636'
   },
   masterUsername: 'Amanda Marinho',
-  // Identificador TÉCNICO do Firebase. Não é e-mail pessoal; nenhuma mensagem é enviada.
-  internalAuthId: 'amanda.marinho.ama-fisio@example.com',
-  // Preenchido automaticamente pelo script configurar-mestre.mjs.
+  // Conta cadastrada no Firebase Authentication; usada internamente no login.
+  // Amanda informa apenas seu nome de usuario na tela do site.
+  internalAuthId: 'manasses.medstar@gmail.com',
+  // UID da conta mestre autorizada nas regras do Firestore.
   masterUid: 'yBUz70Z0iSWkyxFB65tfkmS8Wfk1',
   demoEnabled: false
 };
