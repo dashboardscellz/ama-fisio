@@ -1,0 +1,30 @@
+
+name: Publicar AMA FISIO no Firebase
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'AMA-FISIO-PRONTO/**'
+      - '.github/workflows/firebase-deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar arquivos do GitHub
+        uses: actions/checkout@v4
+
+      - name: Publicar no Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AMA_FISIO }}
+          projectId: ama-fisio
+          channelId: live
+          entryPoint: AMA-FISIO-PRONTO
