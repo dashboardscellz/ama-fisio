@@ -1,0 +1,24 @@
+AMA FISIO v1.5 — CORREÇÃO DO LOGIN QUE VOLTA À TELA INICIAL
+
+O que mudou
+- Não executa mais logout automático quando o Firebase autentica uma conta com UID diferente do autorizado.
+- Em caso de divergência, informa os oito últimos caracteres do UID esperado e do autenticado.
+- Solicita persistência da sessão local para resistir a recargas da página.
+- O acesso aos pacientes permanece restrito ao UID da conta mestre nas regras do Firestore.
+- A senha não é gravada no código e não houve mudança nas regras do Firestore.
+
+COMO ENVIAR SEM SOBRESCREVER O SITE ANTIGO
+1. Extraia este ZIP.
+2. No GitHub, abra o repositório ama-fisio e use Add file > Upload files.
+3. Envie a pasta AMA-FISIO-LOGIN-ESTAVEL inteira para a raiz do repositório.
+4. Clique Commit changes e aguarde GitHub Pages publicar.
+5. Feche outras abas antigas do AMA FISIO (uma versão antiga pode interferir na sessão da mesma conta).
+6. Abra https://dashboardscellz.github.io/ama-fisio/AMA-FISIO-LOGIN-ESTAVEL/
+7. Confira v1.5 no rodapé.
+8. Use Login: Amanda Marinho e a senha atual da conta no Firebase Authentication.
+
+Se aparecer 'Conta não autorizada', compare os finais do UID exibidos com o UID em Authentication > Usuários. Não abra o Firestore a todos.
+Se o UID conferir mas a sessão voltar ao login, envie a mensagem e teste em uma janela anônima, sem abas antigas abertas.
+Se aparecer 'Usuário ou senha incorretos', a senha está diferente da cadastrada no Firebase.
+
+Antes de cadastrar pacientes reais, confirme o login, as regras de acesso e o funcionamento de cadastro e agendamento. Não coloque dados sensíveis no GitHub.
