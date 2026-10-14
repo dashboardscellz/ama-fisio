@@ -1,0 +1,82 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Apenas o UID exclusivo criado durante a instalação pode acessar dados.
+    // Não concedemos permissão por e-mail, nome de usuário ou senha escrita no site.
+    function master() {
+      return request.auth != null && request.auth.uid == 'COLE_UID_AMANDA_AQUI';
+    }
+    function permitted() { return master(); }
+
+    match /users/{userId} {
+      allow read, write: if false;
+    }
+
+    // Cada pessoa vê apenas suas próprias leituras de lembretes.
+    // A versão inclui data e horário; alterações reabrem o aviso automaticamente.
+    match /users/{userId}/reminderReads/{appointmentId} {
+      allow read: if permitted() && request.auth.uid == userId;
+      allow create, update: if permitted()
+        && request.auth.uid == userId
+        && exists(/databases/$(database)/documents/appointments/$(appointmentId))
+        && request.resource.data.keys().hasOnly(['version','readAt'])
+        && request.resource.data.keys().hasAll(['version','readAt'])
+        && request.resource.data.version is string
+        && request.resource.data.version.size() <= 250
+        && request.resource.data.readAt == request.time;
+      allow delete: if false;
+    }
+
+    match /clients/{clientId} {
+      allow read: if permitted();
+      allow create, update: if permitted()
+        && request.resource.data.keys().hasOnly([
+          'name','socialName','birthDate','cpf','gender','phone','email','address','neighborhood','city','state','zip',
+          'guardianName','guardianPhone','guardianRelation','emergencyName','emergencyPhone',
+          'insurance','professional','source','status','notes','chiefComplaint',
+          'privacyAcknowledged','privacyAcknowledgedAt','createdAt','createdBy','updatedAt','updatedBy'
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 180
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() <= 30
+        && request.resource.data.status in ['active','inactive']
+        && request.resource.data.privacyAcknowledged == true
+        && request.resource.data.createdBy is string
+        && (request.method != 'create' || request.resource.data.createdBy == request.auth.uid)
+        && request.resource.data.updatedBy == request.auth.uid
+        && (request.method == 'create' || (
+          request.resource.data.createdBy == resource.data.createdBy
+          && request.resource.data.createdAt == resource.data.createdAt
+        ));
+      allow delete: if master();
+    }
+
+    match /appointments/{appointmentId} {
+      allow read: if permitted();
+      allow create, update: if permitted()
+        && request.resource.data.keys().hasOnly([
+          'clientId','clientName','date','time','duration','type','professional','status','notes','reminderDays','createdAt','createdBy','updatedAt','updatedBy'
+        ])
+        && request.resource.data.clientId is string
+        && request.resource.data.clientName is string
+        && request.resource.data.date is string
+        && request.resource.data.date.size() == 10
+        && request.resource.data.time is string
+        && request.resource.data.time.size() == 5
+        && request.resource.data.status in ['scheduled','confirmed','completed','cancelled']
+        && request.resource.data.get('reminderDays','none') in ['none','0','1','2']
+        && request.resource.data.createdBy is string
+        && (request.method != 'create' || request.resource.data.createdBy == request.auth.uid)
+        && request.resource.data.updatedBy == request.auth.uid
+        && (request.method == 'create' || (
+          request.resource.data.createdBy == resource.data.createdBy
+          && request.resource.data.createdAt == resource.data.createdAt
+        ));
+      allow delete: if master();
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}

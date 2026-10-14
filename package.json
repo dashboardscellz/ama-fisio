@@ -1,0 +1,17 @@
+{
+  "name": "ama-fisio",
+  "version": "1.3.0",
+  "private": true,
+  "description": "Cadastro de clientes e agenda — acesso exclusivo de Amanda, lembretes internos (Firebase Spark)",
+  "type": "module",
+  "scripts": {
+    "dev": "npx http-server docs -p 4173 -c-1",
+    "configurar:mestre": "node scripts/configurar-mestre.mjs",
+    "deploy": "firebase deploy --project ama-fisio --only hosting,firestore:rules",
+    "deploy:hosting": "firebase deploy --project ama-fisio --only hosting",
+    "check": "node --check docs/app.js && node --check scripts/configurar-mestre.mjs"
+  },
+  "devDependencies": {
+    "firebase-tools": "^14.0.0"
+  }
+}
