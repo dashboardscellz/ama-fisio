@@ -4,7 +4,7 @@ service cloud.firestore {
     // Apenas o UID exclusivo criado durante a instalação pode acessar dados.
     // Não concedemos permissão por e-mail, nome de usuário ou senha escrita no site.
     function master() {
-      return request.auth != null && request.auth.uid == 'COLE_UID_AMANDA_AQUI';
+      return request.auth != null && request.auth.uid == 'yBUz70Z0iSWkyxFB65tfkmS8Wfk1';
     }
     function permitted() { return master(); }
 
